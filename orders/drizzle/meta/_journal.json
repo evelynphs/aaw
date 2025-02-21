@@ -1,0 +1,13 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1740131369369,
+      "tag": "0000_new_stone_men",
+      "breakpoints": true
+    }
+  ]
+}
