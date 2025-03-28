@@ -17,4 +17,10 @@ router.put('/category/:category_id', verifyJWTProduct, validate(Validation.editC
 router.delete('/:id', verifyJWTProduct, validate(Validation.deleteProductSchema), Handler.deleteProductHandler);
 router.delete('/category/:category_id', verifyJWTProduct, validate(Validation.deleteCategorySchema), Handler.deleteCategoryHandler);
 
-export default router;
+const routerV2 = express.Router();
+routerV2.get('/:id', validate(Validation.getProductByIdSchema), Handler.getProductByIdHandler);
+routerV2.post('/many', validate(Validation.getManyProductDatasByIdSchema), Handler.getManyProductDatasByIdHandler);
+routerV2.put('/category/:category_id', verifyJWTProduct, validate(Validation.editCategorySchema), Handler.editCategoryHandler);
+routerV2.delete('/category/:category_id', verifyJWTProduct, validate(Validation.deleteCategorySchema), Handler.deleteCategoryHandler);
+
+export default {router, routerV2};
