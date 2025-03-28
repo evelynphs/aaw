@@ -1,6 +1,6 @@
 FROM node:18.18.2 AS builder
 
-WORKDIR /marketplace
+WORKDIR /wishlist
 
 COPY package.json ./
 
@@ -19,16 +19,16 @@ RUN pnpm run build
 # Production image
 FROM node:18.18.2-slim
 
-ENV PORT 8000
+ENV PORT 8004
 ENV NODE_ENV production
 
-WORKDIR /marketplace
+WORKDIR /wishlist
 
-COPY --from=builder /marketplace/dist ./dist
-COPY --from=builder /marketplace/package.json ./package.json
+COPY --from=builder /wishlist/dist ./dist
+COPY --from=builder /wishlist/package.json ./package.json
 
 RUN npm install --only=production
 
-EXPOSE 8000
+EXPOSE 8004
 
 CMD ["node", "dist/src/server.js"]
