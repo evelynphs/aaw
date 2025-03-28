@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wishlist-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wishlist-app
+  template:
+    metadata:
+      labels:
+        app: wishlist-app
+    spec:
+      containers:
+      - name: wishlist-app
+        image: wishlist-marketplace:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8004
+        env:
+        - name: TENANT_ID
+          value: "47dd6b24-0b23-46b0-a662-776158d089ba"
+        - name: AUTH_MS_URL
+          value: "http://auth-service:8000"
+        - name: DB_HOST
+          value: "wishlist-db-service"
+        - name: DB_PORT
+          value: "5432"

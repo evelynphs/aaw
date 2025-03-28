@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth-app
+  template:
+    metadata:
+      labels:
+        app: auth-app
+    spec:
+      containers:
+      - name: auth-app
+        image: authentication-marketplace:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8000
+        env:
+        - name: TENANT_ID
+          value: "47dd6b24-0b23-46b0-a662-776158d089ba"
+        - name: JWT_SECRET
+          value: "auth_ms_jwt_secret"
+        - name: DB_HOST
+          value: "auth-db-service"
+        - name: DB_PORT
+          value: "5432"
