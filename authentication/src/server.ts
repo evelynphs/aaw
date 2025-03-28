@@ -4,11 +4,17 @@ dotenv.config();
 import express, { Express, NextFunction, Request, Response } from "express";
 import cors from "cors";
 
+import swaggerUi from "swagger-ui-express";
+import yaml from "yamljs";
+
 import authRoutes from "./user/user.routes"
 
 import express_prom_bundle from "express-prom-bundle";
 
 const app: Express = express();
+
+const swaggerDocument = yaml.load("./auth_api.yaml");
+app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Prometheus metrics middleware
 const metricsMiddleware = express_prom_bundle({

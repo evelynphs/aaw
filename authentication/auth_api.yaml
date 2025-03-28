@@ -1,0 +1,190 @@
+swagger: "2.0"
+info:
+  title: Product API
+  description: API documentation for product-related operations.
+  version: 1.0.0
+
+host: localhost:8000
+schemes:
+  - http
+
+paths:
+  /api/v1/auth/register:
+    post:
+      summary: Register user
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/RegisterRequest'
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/RegisterResponse'
+
+  /api/v1/auth/login:
+    post:
+      summary: User Login
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/LoginRequest'
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/LoginResponse'
+
+  /api/v1/auth/verify-token:
+    post:
+      summary: User Token Verification
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/VerifyTokenResponse'
+
+  /api/v1/auth/verify-admin-token:
+    post:
+      summary: Admin Token Verification
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/VerifyTokenResponse'
+
+# =================================================
+
+securityDefinitions:
+  BearerAuth:
+    type: apiKey
+    name: Authorization
+    in: header
+
+definitions:
+  RegisterRequest:
+    type: object
+    required:
+      - username
+      - email
+      - password
+      - full_name
+      - address
+      - phone_number
+    properties:
+      username:
+        type: string
+        example: Trisha
+      email:
+        type: string
+        format: email
+        example: trisha@example.com
+      password:
+        type: string
+        format: password
+        minLength: 8
+        example: passW_890
+      full_name:
+        type: string
+        example: Trisha Jane
+      address:
+        type: string
+        example: Jl. Paus No. 5
+      phone_number:
+        type: string
+        example: 08146247268
+
+  RegisterResponse:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 4bf5fe2c-f41d-466d-8a3b-326774823a92
+        username:
+          type: string
+          example: Trisha
+        email:
+          type: string
+          format: email
+          example: trisha@example.com
+        full_name:
+          type: string
+          example: Trisha Jane
+        address:
+          type: string
+          example: Jl. Paus No. 5
+        phone_number:
+          type: string
+          example: 08146247268
+
+  LoginRequest:
+    type: object
+    required:
+      - username
+    properties:
+      username:
+        type: string
+        example: Trisha
+      password:
+        type: string
+        format: password
+        minLength: 8
+        example: passW_890
+
+  LoginResponse:
+    type: object
+    properties:
+      token:
+        type: string
+
+  VerifyTokenResponse:
+    type: object
+    properties:
+      user:
+        type: object
+        properties:
+          id:
+            type: string
+            format: uuid
+            example: 4bf5fe2c-f41d-466d-8a3b-326774823a92
+          username:
+            type: string
+            example: admin
+          email:
+            type: string
+            format: email
+            example: admin@example.com
+          full_name:
+            type: string
+            example: admin
+          address:
+            type: string
+            example: admin
+          phone_number:
+            type: string
+            example: admin
