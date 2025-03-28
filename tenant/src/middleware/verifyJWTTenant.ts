@@ -4,7 +4,7 @@ import { UnauthenticatedResponse } from "../commons/patterns/exceptions";
 import axios, { AxiosResponse } from "axios";
 import { getTenantService } from "@src/tenant/services";
 
-const VERIFY_ADMIN_TOKEN_URL = "http://localhost:8000/api/auth/verify-admin-token"
+const VERIFY_ADMIN_TOKEN_URL = "http://localhost:8000/api/v1/auth/verify-admin-token"
 
 interface JWTUser extends JwtPayload {
   id: string;

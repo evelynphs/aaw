@@ -3,8 +3,8 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 import { UnauthenticatedResponse } from "../commons/patterns/exceptions";
 import axios, { AxiosResponse } from "axios";
 
-const VERIFY_ADMIN_TOKEN_URL = "http://localhost:8000/api/auth/verify-admin-token"
-const GET_TENANT_URL = "http://localhost:8003/api/tenant"
+const VERIFY_ADMIN_TOKEN_URL = "http://localhost:8000/api/v1/auth/verify-admin-token"
+const GET_TENANT_URL = "http://localhost:8003/api/v1/tenant"
 
 export const verifyJWTProduct = async (
   req: Request,

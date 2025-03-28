@@ -4,7 +4,7 @@ import { createOrder } from "../dao/createOrder.dao";
 import axios, { AxiosResponse } from "axios";
 import { User, Product } from "@src/types";
 
-const PRODUCT_URL = "http://localhost:8002/api/product"
+const PRODUCT_URL = "http://localhost:8002/api/v2/product"
 
 export const placeOrderService = async (
     user: User,
