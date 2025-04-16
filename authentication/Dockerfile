@@ -3,6 +3,7 @@ FROM node:18.18.2 AS builder
 WORKDIR /authentication
 
 COPY package.json ./
+COPY auth_api.yaml ./
 
 # Install pnpm
 RUN npm install -g pnpm typescript
@@ -26,6 +27,7 @@ WORKDIR /authentication
 
 COPY --from=builder /authentication/dist ./dist
 COPY --from=builder /authentication/package.json ./package.json
+COPY --from=builder /authentication/auth_api.yaml ./auth_api.yaml
 
 RUN npm install --only=production
 
