@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: auth-app
-        image: authentication-marketplace:latest
+        image: evelynphs/authentication-marketplace:latest
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8000
@@ -27,3 +27,12 @@ spec:
           value: "auth-db-service"
         - name: DB_PORT
           value: "5432"
+        - name: DB_NAME
+          value: "authentication"
+        resources:
+          requests:
+            cpu: "200m"
+            memory: "256Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
